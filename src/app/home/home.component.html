@@ -1,29 +1,37 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<form [formGroup]="formulario" (ngSubmit)="guardar()">
+  <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && val.nombre.errors }"  />
+          <div *ngIf="submitted && val.nombre.errors" class="invalid-feedback">
+            <div *ngIf="val.nombre.errors.required">Por favor, ingresa tu Nombre</div>
+        </div>
+      </div>                    
+      <div class="form-group">
+          <label>Email</label>
+          <input type="text" id="email"  formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && val.email.errors }" />
+          <div *ngIf="submitted && val.email.errors" class="invalid-feedback">
+            <div *ngIf="val.email.errors.required">El email es obligatorio</div>
+            <div *ngIf="val.email.errors.email">Por favor, ingresa un Email valido</div>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="genero"> Genero</label>
+          <select class="form-control" id="genero" formControlName="genero"  [ngClass]="{ 'is-invalid': submitted && val.genero.errors }" >
+            <option value="">Seleccionar</option>
+            <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>			      
+            
+          </select>
+          <div *ngIf="submitted && val.genero.errors" class="invalid-feedback">
+            <div *ngIf="val.genero.errors.required">El genero es obligatorio</div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label>Edad</label>
+        <input type="text" formControlName="edad" id="edad"  class="form-control"  />        
+      </div>
+     <button class="btn btn-primary">Guardar</button>
+
+ 
+</form>
